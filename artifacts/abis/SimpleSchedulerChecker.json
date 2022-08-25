@@ -1,22 +1,5 @@
 [
     {
-        "members": [
-            {
-                "name": "low",
-                "offset": 0,
-                "type": "felt"
-            },
-            {
-                "name": "high",
-                "offset": 1,
-                "type": "felt"
-            }
-        ],
-        "name": "Uint256",
-        "size": 2,
-        "type": "struct"
-    },
-    {
         "data": [
             {
                 "name": "previousOwner",
@@ -39,7 +22,7 @@
             },
             {
                 "name": "_allowed_amount",
-                "type": "Uint256"
+                "type": "felt"
             },
             {
                 "name": "_time",
@@ -51,14 +34,14 @@
         "type": "constructor"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "increase_balance",
+        "outputs": [
             {
-                "name": "amount",
+                "name": "success",
                 "type": "felt"
             }
         ],
-        "name": "increase_balance",
-        "outputs": [],
         "type": "function"
     },
     {

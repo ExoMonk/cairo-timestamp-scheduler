@@ -18,7 +18,7 @@ from openzeppelin.access.ownable.library import Ownable
 #
 
 @storage_var
-func balance() -> (res : felt):
+func balance(user : felt) -> (value : felt):
 end
 
 @storage_var
@@ -30,7 +30,7 @@ func waiter() -> (wait_time : felt):
 end
 
 @storage_var
-func allowed_amount() -> (withdraw_value : Uint256):
+func allowed_amount() -> (withdraw_value : felt):
 end
 
 #
@@ -39,7 +39,7 @@ end
 
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    owner : felt, _allowed_amount : Uint256, _time : felt
+    owner : felt, _allowed_amount : felt, _time : felt
 ):
     Ownable.initializer(owner)
     allowed_amount.write(_allowed_amount)
@@ -53,11 +53,22 @@ end
 #
 
 @external
-func increase_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        amount : felt):
-    let (res) = balance.read()
-    balance.write(res + amount)
-    return ()
+func increase_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    success : felt
+):
+    alloc_locals
+    let (caller_address : felt) = get_caller_address()
+    let (_allowed_amount : felt) = allowed_amount.read()
+    let (_is_allowed : felt) = isAllowedForTransaction(caller_address)
+    if _is_allowed == TRUE:
+        let (timestamp : felt) = get_block_timestamp()
+        let (_time_to_wait : felt) = waiter.read()
+        user_unlock_time.write(caller_address, timestamp + _time_to_wait)
+        let (res) = balance.read(caller_address)
+        balance.write(caller_address, res + _allowed_amount)
+        return (TRUE)
+    end
+    return (FALSE)
 end
 
 
@@ -68,7 +79,8 @@ end
 @view
 func get_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
         res : felt):
-    let (res) = balance.read()
+    let (caller_address : felt) = get_caller_address()
+    let (res) = balance.read(caller_address)
     return (res)
 end
 
