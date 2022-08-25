@@ -33,8 +33,8 @@ yarn install
 - Compiling simple contract
 
 ```
-nile compile contracts/SimpleERC721.cairo
-🔨 Compiling contracts/SimpleERC721.cairo ✅ Done
+nile compile contracts/SimpleSchedulerChecker.cairo
+🔨 Compiling contracts/SimpleSchedulerChecker.cairo ✅ Done
 ```
 
 
