@@ -4,6 +4,11 @@ Cairo StarkNet : Limit user's actions by time
 
 Basic Smart Contract using timestamp and blocks to limit user's interaction with the Contract
 
+`SimpleSchedulerChecker.cairo` contract allows any user to perform a specific transaction, only once given a period of time (timestamp)
+
+This is pretty usefull for doing Faucets as an example
+
+
 ## Installation & Setup
 
 ```
