@@ -4,6 +4,7 @@
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math_cmp import is_le
 from starkware.cairo.common.bool import TRUE, FALSE
+from starkware.cairo.common.uint256 import Uint256
 from starkware.starknet.common.syscalls import (
     get_caller_address,
     get_block_number,
@@ -73,7 +74,7 @@ end
 
 @view
 func get_wait{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):
-    let (res : felt) = wait_time.read()
+    let (res : felt) = waiter.read()
     return (res)
 end
 
