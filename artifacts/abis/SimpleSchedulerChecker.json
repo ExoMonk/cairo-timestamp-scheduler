@@ -1,5 +1,22 @@
 [
     {
+        "members": [
+            {
+                "name": "low",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "high",
+                "offset": 1,
+                "type": "felt"
+            }
+        ],
+        "name": "Uint256",
+        "size": 2,
+        "type": "struct"
+    },
+    {
         "data": [
             {
                 "name": "previousOwner",
@@ -21,8 +38,12 @@
                 "type": "felt"
             },
             {
-                "name": "_allowed_amount",
+                "name": "_token_address",
                 "type": "felt"
+            },
+            {
+                "name": "_allowed_amount",
+                "type": "Uint256"
             },
             {
                 "name": "_time",
@@ -35,25 +56,13 @@
     },
     {
         "inputs": [],
-        "name": "increase_balance",
+        "name": "faucet_mint",
         "outputs": [
             {
                 "name": "success",
                 "type": "felt"
             }
         ],
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "get_balance",
-        "outputs": [
-            {
-                "name": "res",
-                "type": "felt"
-            }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {
