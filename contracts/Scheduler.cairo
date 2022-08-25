@@ -85,3 +85,21 @@ func get_allowed_time{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     let (res : felt) = user_unlock_time.read(account)
     return (res)
 end
+
+@view
+func isAllowedForTransaction{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    address : felt
+) -> (success : felt):
+    alloc_locals
+    let (unlock_time : felt) = user_unlock_time.read(address)
+    if unlock_time == 0:
+        return (TRUE)
+    end
+    let (timestamp : felt) = get_block_timestamp()
+    let (unlock_time : felt) = user_unlock_time.read(address)
+    let (_is_valid : felt) = is_le(unlock_time, timestamp)
+    if _is_valid == TRUE:
+        return (TRUE)
+    end
+    return (FALSE)
+end
