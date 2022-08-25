@@ -67,6 +67,18 @@
     },
     {
         "inputs": [],
+        "name": "get_token_address",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "get_wait",
         "outputs": [
             {

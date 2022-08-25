@@ -83,6 +83,12 @@ end
 #
 
 @view
+func get_token_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):
+    let (res : felt) = token_address.read()
+    return (res)
+end
+
+@view
 func get_wait{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):
     let (res : felt) = waiter.read()
     return (res)
